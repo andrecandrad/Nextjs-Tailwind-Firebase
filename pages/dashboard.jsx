@@ -65,7 +65,7 @@ export default function Dashboard() {
         )}
         {myPosts.map((post) => (
           <Message key={post.id} {...post}>
-            <div className="flex gap-4">
+            <div className="flex gap-4 mt-6">
               <button
                 onClick={() => deletePost(post.id)}
                 className="text-red-500 py-2 px-4 flex items-center justify-center gap-2 text-sm rounded-lg border-2 border-red-500"
