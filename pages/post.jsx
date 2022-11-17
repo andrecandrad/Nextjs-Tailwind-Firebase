@@ -22,6 +22,7 @@ export default function Post() {
     //Run checks for post
     if (!post.description) {
       toast.error("Description Field is Empty. 🤦‍♂️", {
+        toastId: "empty1",
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000,
       });
@@ -30,6 +31,7 @@ export default function Post() {
 
     if (post.description.length > 300) {
       toast.error("Description is too long. 😴", {
+        toastId: "long1",
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000,
       });

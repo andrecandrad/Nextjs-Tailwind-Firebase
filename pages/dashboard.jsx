@@ -40,6 +40,7 @@ export default function Dashboard() {
     const docRef = doc(db, "posts", id);
     await deleteDoc(docRef);
     toast.success("Post was deleted. ❌", {
+      toastId: id,
       position: toast.POSITION.TOP_CENTER,
       autoClose: 2000,
     });
@@ -57,6 +58,11 @@ export default function Dashboard() {
         All your posts
       </h2>
       <div>
+        {myPosts.length == 0 && (
+          <h3 className="text-lg border p-6 border-gray-200 rounded-lg text-gray-800">
+            You havent published anything yet.
+          </h3>
+        )}
         {myPosts.map((post) => (
           <Message key={post.id} {...post}>
             <div className="flex gap-4">
