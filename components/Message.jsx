@@ -1,5 +1,6 @@
 import { Timestamp } from "firebase/firestore";
 import { BiTimeFive } from "react-icons/bi";
+import Image from "next/image";
 
 export default function Message({
   children,
@@ -11,7 +12,9 @@ export default function Message({
   return (
     <div className="bg-white p-6 border mt-[-1px] border-gray-200 rounded-lg">
       <div className="flex items-center gap-2">
-        <img
+        <Image
+          width={100}
+          height={100}
           src={avatar}
           alt={username}
           className="w-10 rounded-full border-2 border-cyan-500"

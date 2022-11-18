@@ -13,6 +13,7 @@ import {
 } from "firebase/firestore";
 
 import { BiTimeFive } from "react-icons/bi";
+import Image from "next/image";
 
 export default function Details() {
   const router = useRouter();
@@ -88,7 +89,9 @@ export default function Details() {
               key={message.time}
             >
               <div className="flex items-center gap-2">
-                <img
+                <Image
+                  width={100}
+                  height={100}
                   className="w-10 rounded-full border-2 border-cyan-500"
                   src={message.avatar}
                   alt={message.userName}
