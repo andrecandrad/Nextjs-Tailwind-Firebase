@@ -25,7 +25,7 @@ export default function Message({
       <div className="flex items-center text-gray-600 gap-1 text-sm">
         <BiTimeFive />
         <p>
-          {new Date(timestamp.seconds * 1000)
+          {new Date(timestamp?.seconds * 1000)
             .toLocaleDateString("pt-BR")
             .toString()}
         </p>

@@ -63,6 +63,10 @@ export default function Post() {
         username: user.displayName,
       });
 
+      toast.success("Post has been made! 🚀", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+
       return route.push("/");
     }
   };
