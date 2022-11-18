@@ -12,6 +12,8 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
+import { BiTimeFive } from "react-icons/bi";
+
 export default function Details() {
   const router = useRouter();
   const routeData = router.query;
@@ -55,7 +57,7 @@ export default function Details() {
   useEffect(() => {
     if (!router.isReady) return;
     getComments();
-  }, []);
+  }, [router.isReady]);
 
   return (
     <div>
@@ -95,6 +97,14 @@ export default function Details() {
               </div>
               <div className="py-4">
                 <h2 className="font-normal text-base">{message.message}</h2>
+              </div>
+              <div className="flex items-center text-gray-600 gap-1 text-sm">
+                <BiTimeFive />
+                <p>
+                  {new Date(message.time?.seconds * 1000)
+                    .toLocaleDateString("pt-BR")
+                    .toString()}
+                </p>
               </div>
             </div>
           ))}
