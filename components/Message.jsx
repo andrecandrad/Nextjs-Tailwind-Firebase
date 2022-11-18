@@ -24,9 +24,11 @@ export default function Message({
       </div>
       <div className="flex items-center text-gray-600 gap-1 text-sm">
         <BiTimeFive />
-        {new Timestamp(timestamp.seconds, timestamp.nanoseconds)
-          .toDate()
-          .toDateString()}
+        <p>
+          {new Date(timestamp.seconds * 1000)
+            .toLocaleDateString("pt-BR")
+            .toString()}
+        </p>
       </div>
       {children}
     </div>

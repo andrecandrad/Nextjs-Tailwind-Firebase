@@ -35,7 +35,7 @@ export default function Home() {
           See what other people are saying
         </h2>
         {allPosts.map((post) => (
-          <Message {...post} />
+          <Message key={post.id} {...post} />
         ))}
       </div>
     </div>
