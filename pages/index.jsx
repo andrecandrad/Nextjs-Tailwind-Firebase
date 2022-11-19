@@ -1,14 +1,25 @@
 import Head from "next/head";
-import Nav from "../components/Nav";
 import Message from "../components/Message";
 import { useEffect, useState } from "react";
-import { db } from "../utils/firebase";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { auth, db } from "../utils/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import Link from "next/link";
+import { BsFillTrash2Fill } from "react-icons/bs";
+import { toast } from "react-toastify";
 
 export default function Home() {
   //Create a state with all posts
   const [allPosts, setAllPosts] = useState([]);
+
+  const [user, loading] = useAuthState(auth);
 
   const getPosts = async () => {
     const collectionRef = collection(db, "posts");
@@ -17,6 +28,18 @@ export default function Home() {
       setAllPosts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
     return unsubscribe;
+  };
+
+  //Delete post
+  const deletePost = async (id) => {
+    const docRef = doc(db, "posts", id);
+    await deleteDoc(docRef);
+    toast.success("Post was deleted. ❌", {
+      toastId: id,
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 2000,
+    });
+    return;
   };
 
   useEffect(() => {
@@ -37,11 +60,20 @@ export default function Home() {
         </h2>
         {allPosts.map((post) => (
           <Message key={post.id} {...post}>
-            <Link href={{ pathname: `/${post.id}`, query: { ...post } }}>
-              <button className="text-sm mt-2">
-                {post.comments?.length ? post.comments.length : 0} comments
-              </button>
-            </Link>
+            <div className="flex align-center justify-between">
+              <Link href={{ pathname: `/${post.id}`, query: { ...post } }}>
+                <button className="text-sm mt-2">
+                  {post.comments?.length ? post.comments.length : 0} comments
+                </button>
+              </Link>
+              {user.uid !== process.env.NEXT_PUBLIC_ADMIN_UID ? (
+                ""
+              ) : (
+                <button onClick={() => deletePost(post.id)}>
+                  <BsFillTrash2Fill className="text-red-500" />
+                </button>
+              )}
+            </div>
           </Message>
         ))}
       </div>
