@@ -26,12 +26,18 @@ export default function Message({
         <p className="font-normal text-base">{description}</p>
       </div>
       <div className="flex items-center text-gray-600 gap-1 text-sm">
-        <BiTimeFive />
-        <p>
-          {new Date(timestamp?.seconds * 1000)
-            .toLocaleDateString("pt-BR")
-            .toString()}
-        </p>
+        {!timestamp ? (
+          ""
+        ) : (
+          <>
+            <BiTimeFive />
+            <p>
+              {new Date(timestamp?.seconds * 1000)
+                .toLocaleDateString("pt-BR")
+                .toString()}
+            </p>
+          </>
+        )}
       </div>
       {children}
     </div>
