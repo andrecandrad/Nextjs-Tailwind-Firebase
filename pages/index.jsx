@@ -66,7 +66,7 @@ export default function Home() {
                   {post.comments?.length ? post.comments.length : 0} comments
                 </button>
               </Link>
-              {user.uid !== process.env.NEXT_PUBLIC_ADMIN_UID ? (
+              {user?.uid !== process.env.NEXT_PUBLIC_ADMIN_UID ? (
                 ""
               ) : (
                 <button onClick={() => deletePost(post.id)}>
