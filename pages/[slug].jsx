@@ -83,34 +83,43 @@ export default function Details() {
           <h2 className="text-xl font-medium mb-8 mt-8 border-l-4 border-cyan-400 pl-2">
             Comments
           </h2>
-          {allMessages?.map((message) => (
-            <div
-              className="bg-white p-6 border mt-[-1px] border-gray-200 rounded-lg"
-              key={message.time}
-            >
-              <div className="flex items-center gap-2">
-                <Image
-                  width={100}
-                  height={100}
-                  className="w-10 rounded-full border-2 border-cyan-500"
-                  src={message.avatar}
-                  alt={message.userName}
-                />
-                <h2 className="text-lg font-thin">{message.userName}</h2>
-              </div>
-              <div className="py-4">
-                <h2 className="font-normal text-base">{message.message}</h2>
-              </div>
-              <div className="flex items-center text-gray-600 gap-1 text-sm">
-                <BiTimeFive />
-                <p>
-                  {new Date(message.time?.seconds * 1000)
-                    .toLocaleDateString("pt-BR")
-                    .toString()}
-                </p>
-              </div>
+          {allMessages.length <= 0 && (
+            <div>
+              <h3 className="text-lg border p-6 border-gray-200 rounded-lg text-gray-800">
+                This post has any comments yet... 💤
+              </h3>
             </div>
-          ))}
+          )}
+          {allMessages
+            ? allMessages.map((message) => (
+                <div
+                  className="bg-white p-6 border mt-[-1px] border-gray-200 rounded-lg"
+                  key={message.time}
+                >
+                  <div className="flex items-center gap-2">
+                    <Image
+                      width={100}
+                      height={100}
+                      className="w-10 rounded-full border-2 border-cyan-500"
+                      src={message.avatar}
+                      alt={message.userName}
+                    />
+                    <h2 className="text-lg font-thin">{message.userName}</h2>
+                  </div>
+                  <div className="py-4">
+                    <h2 className="font-normal text-base">{message.message}</h2>
+                  </div>
+                  <div className="flex items-center text-gray-600 gap-1 text-sm">
+                    <BiTimeFive />
+                    <p>
+                      {new Date(message.time?.seconds * 1000)
+                        .toLocaleDateString("pt-BR")
+                        .toString()}
+                    </p>
+                  </div>
+                </div>
+              ))
+            : ""}
         </div>
       </div>
     </div>
